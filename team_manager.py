@@ -4,7 +4,7 @@ import requests
 # ======= CONFIGURATION =======
 JOIN_TEAM_ID = "world-chess-960-front"   # Team to join
 LEAVE_TEAM_ID = "developers"             # Team to leave
-MESSAGE_TEAM_ID = "coders"               # Team to message
+MESSAGE_TEAM_ID = "international-chess-talent"               # Team to message
 MESSAGE_FILE = "d.txt"                   # File containing the message
 # ==============================
 
