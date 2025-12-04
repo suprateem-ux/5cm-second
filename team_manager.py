@@ -8,7 +8,7 @@ MESSAGE_TEAM_ID = "international-chess-talent"
 MESSAGE_FILE = "d.txt"
 
 # DM username (set it here)
-DM_USERNAME = "sharanyojack"   # <- change to whoever you want to DM
+DM_USERNAME = "Unstoppable_2011"   # <- change to whoever you want to DM
 
 # DM message file
 DM_MESSAGE_FILE = "p.txt"
