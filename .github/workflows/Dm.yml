@@ -1,0 +1,25 @@
+name: Send DM
+
+on:
+  workflow_dispatch: {}   # run manually
+
+jobs:
+  send_dm:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.11"
+
+    - name: Install dependencies
+      run: pip install requests
+
+    - name: Run dm.py
+      env:
+        LICHESS_TOKEN: ${{ secrets.LICHESS_TOKEN }}
+      run: python dm.py
