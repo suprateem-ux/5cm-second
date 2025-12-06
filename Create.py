@@ -108,7 +108,7 @@ def create_and_update(day_index):
     # STEP A — create tournament (only host team)
     data_create = {
         "name": name,
-        "clockTime": 1,
+        "clockTime": 2,
         "clockIncrement": 0,
         "minutes": 420,
         "variant": "standard",
