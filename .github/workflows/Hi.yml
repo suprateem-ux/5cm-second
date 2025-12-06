@@ -20,6 +20,6 @@ jobs:
 
       - name: Run create script
         env:
-          LICHESS_KEY: ${{ secrets.LICHESS_KEY }}
+          LICHESS_KEY: ${{ secrets.LICHESS_TOKEN }}
         run: |
           ./create_lichess_tournaments.sh
