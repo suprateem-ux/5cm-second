@@ -3,7 +3,7 @@
 # Creates 40 Lichess team-battle tournaments (one per day), Day 1 = 2025-12-14 19:00 IST
 # Requires: env var LICHESS_KEY to be set to your token
 
-if [ -z "${LICHESS_KEY:-}" ]; then
+if [ -z "${LICHESS_TOKEN:-}" ]; then
   echo "ERROR: Please set LICHESS_KEY environment variable (your Lichess API token)."
   exit 1
 fi
