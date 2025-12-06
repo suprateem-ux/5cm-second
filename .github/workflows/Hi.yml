@@ -1,0 +1,25 @@
+name: Create Lichess Tournaments (manual)
+
+on:
+  workflow_dispatch: {}
+
+jobs:
+  create-tournaments:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Make script executable
+        run: chmod +x ./create_lichess_tournaments.sh
+
+      - name: Run create script
+        env:
+          LICHESS_KEY: ${{ secrets.LICHESS_KEY }}
+        run: |
+          ./create_lichess_tournaments.sh
