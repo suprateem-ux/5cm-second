@@ -103,7 +103,7 @@ def create_and_update(day_index):
     dt = START + timedelta(days=day_index)
     starts_at_ms = int(dt.replace(hour=19, minute=0).timestamp() * 1000)
 
-    name = f"DANIEL NARODITSKY MEMORIAL CUP — DAY {day_index+1}"
+    name = f"Naroditsky Memorial Cup Day {day_index+1}"
 
     # STEP A — create tournament (only host team)
     data_create = {
