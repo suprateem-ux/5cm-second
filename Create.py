@@ -10,9 +10,8 @@ headers = {
     "Content-Type": "application/x-www-form-urlencoded"
 }
 
-
 # ---------------------------------------------------
-# TEAMS LIST (same as your bash script)
+# TEAMS LIST
 # ---------------------------------------------------
 team_ids = [
     "world-chess-960-front", "harry-potters-07-team", "harutjunyan-g-and-friends",
@@ -95,22 +94,32 @@ DESCRIPTION = (
 
 
 # ---------------------------------------------------
-# CREATE & UPDATE
+# START DATE (Day 1)
 # ---------------------------------------------------
 START = datetime(2025, 12, 14, tzinfo=ZoneInfo("Asia/Kolkata"))
 
+
+# ---------------------------------------------------
+# CREATE & UPDATE FUNCTION
+# ---------------------------------------------------
 def create_and_update(day_index):
+    # Each day is a separate real date:
     dt = START + timedelta(days=day_index)
-    starts_at_ms = int(dt.replace(hour=19, minute=0).timestamp() * 1000)
+
+    # Set exact start time: 7 PM IST
+    dt = dt.replace(hour=19, minute=0, second=0, microsecond=0)
+
+    # Convert to ms
+    starts_at_ms = int(dt.timestamp() * 1000)
 
     name = f"Naroditsky Memorial Cup Day {day_index+1}"
 
-    # STEP A — create tournament (only host team)
+    # Create tournament
     data_create = {
         "name": name,
         "clockTime": 2,
         "clockIncrement": 0,
-        "minutes": 420,
+        "minutes": 420,  # 7 hours → ends at 2 AM
         "variant": "standard",
         "rated": "true",
         "berserkable": "true",
@@ -120,16 +129,10 @@ def create_and_update(day_index):
         "description": DESCRIPTION,
         "waitMinutes": 5,
         "conditions.accountAge": 1,
-
-        # only ONE host team allowed:
         "teamBattleByTeam": "world-chess-front-official",
     }
 
-    r = requests.post(
-        "https://lichess.org/api/tournament",
-        headers=headers,
-        data=data_create
-    )
+    r = requests.post("https://lichess.org/api/tournament", headers=headers, data=data_create)
 
     print(name, r.status_code)
     print(r.text)
@@ -139,7 +142,7 @@ def create_and_update(day_index):
 
     tournament_id = r.json()["id"]
 
-    # STEP B — add all teams + 15 leaders
+    # Update with teams + leaders
     data_update = {
         "teams": TEAMS_STRING,
         "nbLeaders": 15
@@ -156,5 +159,8 @@ def create_and_update(day_index):
     print("---------------")
 
 
+# ---------------------------------------------------
+# RUN FOR 40 DAYS
+# ---------------------------------------------------
 for i in range(40):
     create_and_update(i)
